@@ -8,6 +8,13 @@ const emerald_per_click_display = document.querySelector('#emerald-per-click-dis
 const shop_container = document.querySelector('#shop-container');
 const tooltip = document.querySelector('#tooltip');
 const rich_div = document.querySelector('#rich-div');
+document.querySelector('#volume-control-div').addEventListener('mousemove', (e)=>{
+    tooltip.hidden = false;
+    tooltip.innerHTML = "<a><b>Volume Control</b></a><br><a>It controls the volume of all the sounds.</a>";
+})
+document.querySelector('#volume-control-div').addEventListener('mouseout', (e)=>{
+    tooltip.hidden = true;
+})
 emerald_count_display.addEventListener('mousemove', (e)=>{
     tooltip.hidden = false;
     tooltip.innerHTML = "<a>You have: " + new Intl.NumberFormat().format(money) + " Emeralds.</a>";
