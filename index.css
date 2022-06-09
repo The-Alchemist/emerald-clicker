@@ -7,6 +7,23 @@
     border: 1px solid black;
     color: white;
 }
+.oldlink {
+    cursor: url('./images/cur2.png') 5 0, pointer;
+}
+#byMe {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+#downloadFolder {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translate(0px, -100%);
+}
+.oldlink:hover {
+    background-color: lime;
+}
 #option-container {
     position: absolute;
     height: 99%;
@@ -103,10 +120,10 @@
     cursor: url('./images/cur2.png') 5 0, pointer;
 }
 .upgrade-item:hover {
-    background: linear-gradient(rgba(255,255,255,0.5), rgba(185, 255, 185, 1))
+    background: linear-gradient(to left, rgba(255,255,255,0.5), rgba(185, 255, 185, 1))
 }
 .shop-item:hover {
-    background: linear-gradient(rgba(255,255,255,0.5), rgba(185, 255, 185, 1))
+    background: linear-gradient(to left, rgba(255,255,255,0.5), rgba(185, 255, 185, 1))
 }
 #modcheck-button {
     width: 100%;
@@ -193,6 +210,10 @@
 }
 #credits:hover {
     max-width: 150px;
+}
+@keyframes up {
+    from{}
+    to{top: 69px;}
 }
 #settings {
     height: 30px;
