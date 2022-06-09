@@ -338,11 +338,11 @@ document.querySelector('#music-option-div').addEventListener('mousemove', (e)=>{
 document.querySelector('#music-option-div').addEventListener('mouseout', (e)=>{
     tooltip.hidden = true;
 })
-document.querySelector('#modcheck-button').addEventListener('mouseenter', (e)=>{const selectAudio = new Audio('./music/select.mp3'); selectAudio.play()});
-document.querySelector('#settings').addEventListener('mouseenter', (e)=>{const selectAudio = new Audio('./music/select.mp3'); selectAudio.play()});
-document.querySelector('#credits').addEventListener('mouseenter', (e)=>{const selectAudio = new Audio('./music/select.mp3'); selectAudio.play()});
-document.querySelector('#downloadFolder').addEventListener('mouseenter', (e)=>{const selectAudio = new Audio('./music/select.mp3'); selectAudio.play()});
-document.querySelector('#byMe').addEventListener('mouseenter', (e)=>{const selectAudio = new Audio('./music/select.mp3'); selectAudio.play()});
+document.querySelector('#modcheck-button').addEventListener('mouseenter', (e)=>{clickSound()});
+document.querySelector('#settings').addEventListener('mouseenter', (e)=>{clickSound()});
+document.querySelector('#credits').addEventListener('mouseenter', (e)=>{clickSound()});
+document.querySelector('#downloadFolder').addEventListener('mouseenter', (e)=>{clickSound()});
+document.querySelector('#byMe').addEventListener('mouseenter', (e)=>{clickSound()});
 function createShopItem(item) {
     let canbuy;
     let soldout;
@@ -384,8 +384,7 @@ function createShopItem(item) {
         
     })
     shopItem.addEventListener('mouseenter', (e)=>{
-        const selectAudio = new Audio('./music/select.mp3');
-        selectAudio.play()
+        clickSound()
     })
     shopItem.addEventListener('mouseout', (e)=>{
         tooltip.hidden = true;
@@ -407,8 +406,7 @@ function createShopItem(item) {
     upgradeItem.id = item['name'] + "up"
     upgradeItem.classList.add('upgrade-item')
     upgradeItem.addEventListener('mouseenter', (e)=>{
-        const selectAudio = new Audio('./music/select.mp3');
-        selectAudio.play()
+        clickSound()
     })
     upgradeItem.addEventListener('mousemove', (e)=>{
         if(item['soldout']) {
@@ -479,13 +477,14 @@ function updateGame() {
     updateCAC(shop13)
     positionRich(money)
 }
-function emeraldClickSound() {
-    new Audio('./music/select.mp3').play();
+function clickSound() {
+    const selAud = new Audio('./music/select.mp3');
+    selAud.play();
 }
 emerald.addEventListener('click', (e)=>{
     money = moneyPerClick + money;
     updateGame()
-    emeraldClickSound()
+    clickSound()
     createLilFloatThing(e, moneyPerClick)
 })
 
