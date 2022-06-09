@@ -2,7 +2,7 @@
 PLEASE DO NOT EDIT THE CODE. IT CAN SEVERELY BREAK
 YOUR GAME. THANK YOU. */
 // correction, edit it, i have no idea what i'm doing.
-const version_name = "v1.1.0a";
+const version_name = "v1.1.1a";
 const emerald_container = document.querySelector('#emerald-container');
 const emerald = document.querySelector('#emerald');
 const emerald_count_display = document.querySelector('#emerald-count-display');
@@ -482,9 +482,13 @@ function updateGame() {
     updateCAC(shop13)
     positionRich(money)
 }
+function emeraldClickSound() {
+    new Audio('./music/select.mp3');
+}
 emerald.addEventListener('click', (e)=>{
     money = moneyPerClick + money;
     updateGame()
+    emeraldClickSound()
     createLilFloatThing(e, moneyPerClick)
 })
 
