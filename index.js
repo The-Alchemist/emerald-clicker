@@ -480,7 +480,7 @@ function updateGame() {
     positionRich(money)
 }
 function emeraldClickSound() {
-    new Audio('./music/select.mp3');
+    new Audio('./music/select.mp3').play();
 }
 emerald.addEventListener('click', (e)=>{
     money = moneyPerClick + money;
