@@ -1,7 +1,4 @@
-/* IF YOU DON'T KNOW WHAT YOU ARE DOING, PLEASE
-PLEASE DO NOT EDIT THE CODE. IT CAN SEVERELY BREAK
-YOUR GAME. THANK YOU. */
-// correction, edit it, i have no idea what i'm doing.
+// lol my code is garbo
 const version_name = "v1.1.1a";
 const emerald_container = document.querySelector('#emerald-container');
 const emerald = document.querySelector('#emerald');
