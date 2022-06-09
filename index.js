@@ -1,4 +1,8 @@
-const version_name = "v1.0.0a";
+/* IF YOU DON'T KNOW WHAT YOU ARE DOING, PLEASE
+PLEASE DO NOT EDIT THE CODE. IT CAN SEVERELY BREAK
+YOUR GAME. THANK YOU. */
+// correction, edit it, i have no idea what i'm doing.
+const version_name = "v1.1.0a";
 const emerald_container = document.querySelector('#emerald-container');
 const emerald = document.querySelector('#emerald');
 const emerald_count_display = document.querySelector('#emerald-count-display');
@@ -10,17 +14,31 @@ const rich_div = document.querySelector('#rich-div');
 emerald_count_display.addEventListener('mousemove', (e)=>{
     tooltip.hidden = false;
     tooltip.innerHTML = "<a>You have: " + new Intl.NumberFormat().format(money) + " Emeralds.</a>";
-    positionTooltip(e)
+    
 })
 emerald_count_display.addEventListener("mouseout", (e)=>{
     tooltip.hidden = true;
 })
+function createLilFloatThing(e, epc) {
+    //alert('1')
+    const what = document.createElement('div');
+    //alert('2')
+    what.style = "position: absolute; top: " + (e.clientY - 25) + "; left: " + (e.clientX + 5) + "; animation: up 1s 1; font-size: 25px; ";
+    //alert('3')
+    what.innerHTML = "+" + epc;
+    //alert('4')
+    document.body.appendChild(what);
+    //alert('5')
+    setTimeout(()=>{ $(what).remove() }, 1000)
+    
+}
 const upgrade_container = document.querySelector('#upgrades-container');
 let low_fps_tooltip = false;
-let music_disabled_pre = true;
+let music_disabled_pre = true; // this is useless
 let money = 0;
 let moneyPerSecond = 0;
 let moneyPerClick = 1;
+/* items */
 let shop1 = {
     name: "Drill",
     desc: "Why use your hand to dig out the emeralds when you can drill them?",
@@ -120,6 +138,24 @@ let shop11 = {
     cost: 45000,
     upgrade: false
 }
+let shop12 = {
+    name: "Luis The Asshole",
+    desc: "His anger could have lots of potential...",
+    mps: 200,
+    costMulti: 1.4,
+    has: 0,
+    cost: 55000,
+    upgrade: false
+}
+let shop13 = {
+    name: "Shopping Carter",
+    desc: "His selfies are family photos.",
+    mps: 250,
+    costMulti: 1.4,
+    has: 0,
+    cost: 69000,
+    upgrade: false
+}
 let up1 = {
     name: "Mikey Mouse",
     desc: "It's the least an offbrand can do for you.",
@@ -140,7 +176,7 @@ let up2 = {
     special: false,
     upgrade: true
 }
-let up3 = {
+/*let up3 = {
     name: "Exploits",
     desc: "This upgrade can multiply your Emeralds Per Click by 2! But there is a 50% chance that all your emeralds will be converted into negative emeralds!",
     src: "",
@@ -149,7 +185,7 @@ let up3 = {
     soldout: false,
     special: false,
     upgrade: true
-}
+}*/
 let up69 = {
     name: "Test",
     desc: "This is the description.",
@@ -178,7 +214,7 @@ function positionRich(lel) {
 document.querySelector('#version-display').innerHTML = version_name;
 document.querySelector('#diamond-clicker-link').addEventListener('mousemove', (e)=>{
     tooltip.hidden = false;
-    positionTooltip(e)
+    
     tooltip.innerHTML = "<a><b>https://edca.w3spaces.com/v3/index-1.html</b></a>";
 })
 document.querySelector('#diamond-clicker-link').addEventListener('mouseout', (e)=>{
@@ -203,6 +239,9 @@ function updateCAC(item) {
 }
 let xpos;
 let ypos;
+document.addEventListener('mousemove', (e)=>{
+    positionTooltip(e)
+})
 function positionTooltip(e){
     if(e.clientX > 1200) {
         xpos = (e.clientX - 12) - (parseInt($('#tooltip').css('width').replace("px", "")));
@@ -224,7 +263,7 @@ function positionTooltip(e){
 }
 document.querySelector('#low-fps-tooltip-div').addEventListener('mousemove', (e)=>{
     tooltip.hidden = false;
-    positionTooltip(e)
+    
     tooltip.innerHTML = "<a><b>Enable Low FPS Tooltip</b></a><br><a>Adds a delay before positioning the tooltip, if that's what you like.</a>"
 })
 document.querySelector('#low-fps-tooltip-div').addEventListener('mouseout', (e)=>{
@@ -288,7 +327,7 @@ document.querySelector('#music').addEventListener('click', (e)=>{
 })
 document.querySelector('#modcheck-toltip').addEventListener('mousemove', (e)=>{
     tooltip.hidden = false;
-    positionTooltip(e)
+    
     tooltip.innerHTML = "<a><b>Modcheck Help</b></a><br><a>This checks if you are a mod, enter the right password, and it lets you in.</a>"
 })
 document.querySelector('#modcheck-toltip').addEventListener('mouseout', (e)=>{
@@ -296,12 +335,17 @@ document.querySelector('#modcheck-toltip').addEventListener('mouseout', (e)=>{
 })
 document.querySelector('#music-option-div').addEventListener('mousemove', (e)=>{
     tooltip.hidden = false;
-    positionTooltip(e)
+    
     tooltip.innerHTML = "<a><b>Enable Background Music</b></a><br><a>Enables Background Music.</a>"
 })
 document.querySelector('#music-option-div').addEventListener('mouseout', (e)=>{
     tooltip.hidden = true;
 })
+document.querySelector('#modcheck-button').addEventListener('mouseenter', (e)=>{const selectAudio = new Audio('./music/select.mp3'); selectAudio.play()});
+document.querySelector('#settings').addEventListener('mouseenter', (e)=>{const selectAudio = new Audio('./music/select.mp3'); selectAudio.play()});
+document.querySelector('#credits').addEventListener('mouseenter', (e)=>{const selectAudio = new Audio('./music/select.mp3'); selectAudio.play()});
+document.querySelector('#downloadFolder').addEventListener('mouseenter', (e)=>{const selectAudio = new Audio('./music/select.mp3'); selectAudio.play()});
+document.querySelector('#byMe').addEventListener('mouseenter', (e)=>{const selectAudio = new Audio('./music/select.mp3'); selectAudio.play()});
 function createShopItem(item) {
     let canbuy;
     let soldout;
@@ -340,7 +384,11 @@ function createShopItem(item) {
             notation: "compact",
             compactDisplay: "long"
         }).format(item['cost']) + " Emeralds</a><br><a>You have: " + item['has'] + ".</a><br><a>This adds " + item['mps'] + " Emeralds Per Second.</a><br><a>" + canbuy + "</a>";
-        positionTooltip(e)
+        
+    })
+    shopItem.addEventListener('mouseenter', (e)=>{
+        const selectAudio = new Audio('./music/select.mp3');
+        selectAudio.play()
     })
     shopItem.addEventListener('mouseout', (e)=>{
         tooltip.hidden = true;
@@ -361,6 +409,10 @@ function createShopItem(item) {
     imag.style = "width: 40px; height: 40px; position: relative; top: 50%; left: 5px; transform: translate(0px, -50%);"
     upgradeItem.id = item['name'] + "up"
     upgradeItem.classList.add('upgrade-item')
+    upgradeItem.addEventListener('mouseenter', (e)=>{
+        const selectAudio = new Audio('./music/select.mp3');
+        selectAudio.play()
+    })
     upgradeItem.addEventListener('mousemove', (e)=>{
         if(item['soldout']) {
             soldout = "<br><a><span style='color: darkred'>You've already have bought this item. It cannot be boughten again.</span></a>"
@@ -381,7 +433,7 @@ function createShopItem(item) {
             }).format((money - item['cost'])) + " emeralds left over.</span>"
         }
         tooltip.hidden = false;
-        positionTooltip(e)
+        
         if(!item['soldout']) {
         tooltip.innerHTML = '<a style="font-size: 18;"><b>' + item['name'] + '</b></a><br><a>' + item['desc'] + '</a><br><a>Cost: ' + new Intl.NumberFormat(undefined, {
             notation: "compact",
@@ -426,12 +478,16 @@ function updateGame() {
     updateCAC(shop9)
     updateCAC(shop10)
     updateCAC(shop11)
+    updateCAC(shop12)
+    updateCAC(shop13)
     positionRich(money)
 }
 emerald.addEventListener('click', (e)=>{
     money = moneyPerClick + money;
     updateGame()
+    createLilFloatThing(e, moneyPerClick)
 })
+
 createShopItem(shop1)
 createShopItem(shop2)
 createShopItem(shop3)
@@ -443,9 +499,10 @@ createShopItem(shop8)
 createShopItem(shop9)
 createShopItem(shop10)
 createShopItem(shop11)
+createShopItem(shop12)
+createShopItem(shop13)
 createShopItem(up1)
 createShopItem(up2)
-//createShopItem(up3)
 setInterval(()=>{
     money = money + moneyPerSecond;
     updateGame();
