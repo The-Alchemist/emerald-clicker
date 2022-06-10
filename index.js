@@ -1,5 +1,5 @@
 // lol my code is garbo
-const version_name = "v1.1.1a";
+const version_name = "1.1.2a";
 const emerald_container = document.querySelector('#emerald-container');
 const emerald = document.querySelector('#emerald');
 const emerald_count_display = document.querySelector('#emerald-count-display');
@@ -493,15 +493,25 @@ function updateGame() {
     updateCAC(shop13)
     positionRich(money)
 }
+// thank you, mdn web docs
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+function clandSound() {
+    let sideways = getRandomArbitrary(1, 3);
+    const audio = new Audio('./music/sound-effect/metalPickaxeClang01.mp3');
+    audio.volume = volume;
+    audio.play();
+}
 function clickSound() {
-    const selAud = new Audio('./music/select.mp3');
+    const selAud = new Audio('./music/sound-effect/select.mp3');
     selAud.volume = volume;
     selAud.play();
 }
 emerald.addEventListener('click', (e)=>{
     money = moneyPerClick + money;
     updateGame()
-    clickSound()
+    clangSound()
     createLilFloatThing(e, moneyPerClick)
 })
 
@@ -523,6 +533,8 @@ createShopItem(up2)
 let volume;
 setInterval(()=>{
     volume = vol_control.value / 100;
+}, 0);
+setInterval(()=>{
     money = money + moneyPerSecond;
     updateGame();
 }, 1000);
