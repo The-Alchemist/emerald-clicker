@@ -7,6 +7,9 @@
     border: 1px solid black;
     color: white;
 }
+.slider {
+    cursor: url('./images/cur2.png') 5 0, pointer;
+}
 #volume-control-div {
     cursor: url('./images/cur2.png') 5 0, pointer;
 }
