@@ -14,6 +14,9 @@ document.querySelector('#vol-display').innerHTML = vol_control.value;
 vol_control.addEventListener('change', (e)=>{
     document.querySelector('#vol-display').innerHTML = vol_control.value;
 })
+vol_control.addEventListener('input', (e)=>{
+    document.querySelector('#vol-display').innerHTML = vol_control.value;
+})
 document.querySelector('#volume-control-div').addEventListener('mousemove', (e)=>{
     tooltip.hidden = false;
     tooltip.innerHTML = "<a><b>Volume Control</b></a><br><a>It controls the volume of all the sounds.</a>";
