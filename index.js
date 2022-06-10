@@ -495,7 +495,7 @@ function updateGame() {
 }
 /* thank you, mdn web docs */
 function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
+    return Math.floor(Math.random() * (max - min) + min);
 }
 function clangSound() {
     let sideways = getRandomArbitrary(1, 3);
@@ -504,13 +504,13 @@ function clangSound() {
         audio.volume = volume;
         audio.play();
     } else if(sideways == 2) {
-        const audio = new Audio('./music/sound-effect/metalPickaxeClang02.mp3');
-        audio.volume = volume;
-        audio.play();
+        const audio1 = new Audio('./music/sound-effect/metalPickaxeClang02.mp3');
+        audio1.volume = volume;
+        audio1.play();
     } else if(sideways == 3) {
-        const audio = new Audio('./music/sound-effect/metalPickaxeClang02.mp3');
-        audio.volume = volume;
-        audio.play();
+        const audio2 = new Audio('./music/sound-effect/metalPickaxeClang03.mp3');
+        audio2.volume = volume;
+        audio2.play();
     }
 }
 function clickSound() {
