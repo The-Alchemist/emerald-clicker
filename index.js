@@ -256,11 +256,11 @@ document.addEventListener('mousemove', (e)=>{
     positionTooltip(e)
 })
 function positionTooltip(e){
-    if(e.clientX > 1200) {
+    if(e.clientX > window.innerWidth - 200) {
         xpos = (e.clientX - 12) - (parseInt($('#tooltip').css('width').replace("px", "")));
     } else {
         xpos = (e.clientX + 12);
-    } if (e.clientY > 500) {
+    } if (e.clientY > window.innerHeight - 400) {
         ypos = (e.clientY) - (parseInt($('#tooltip').css('height').replace("px", "")) - 12);
     } else {
         ypos = (e.clientY + 12);
