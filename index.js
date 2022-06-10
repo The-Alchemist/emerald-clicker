@@ -501,13 +501,17 @@ function clangSound() {
     let sideways = getRandomArbitrary(1, 3);
     if(sideways == 1) {
         const audio = new Audio('./music/sound-effect/metalPickaxeClang01.mp3');
+        audio.volume = volume;
+        audio.play();
     } else if(sideways == 2) {
         const audio = new Audio('./music/sound-effect/metalPickaxeClang02.mp3');
+        audio.volume = volume;
+        audio.play();
     } else if(sideways == 3) {
         const audio = new Audio('./music/sound-effect/metalPickaxeClang02.mp3');
+        audio.volume = volume;
+        audio.play();
     }
-    audio.volume = volume;
-    audio.play();
 }
 function clickSound() {
     const selAud = new Audio('./music/sound-effect/select.mp3');
