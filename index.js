@@ -8,6 +8,10 @@ const emerald_per_click_display = document.querySelector('#emerald-per-click-dis
 const shop_container = document.querySelector('#shop-container');
 const tooltip = document.querySelector('#tooltip');
 const rich_div = document.querySelector('#rich-div');
+const vol_control = document.querySelector('#volume-control');
+vol_control.addEventListener('change', (e)=>{
+    document.querySelector('#vol-display').innerHTML = vol_control.value;
+})
 document.querySelector('#volume-control-div').addEventListener('mousemove', (e)=>{
     tooltip.hidden = false;
     tooltip.innerHTML = "<a><b>Volume Control</b></a><br><a>It controls the volume of all the sounds.</a>";

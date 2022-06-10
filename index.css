@@ -7,6 +7,9 @@
     border: 1px solid black;
     color: white;
 }
+#volume-control-div {
+    cursor: url('./images/cur2.png') 5 0, pointer;
+}
 .oldlink {
     cursor: url('./images/cur2.png') 5 0, pointer;
 }
