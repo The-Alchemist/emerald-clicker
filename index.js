@@ -499,7 +499,13 @@ function getRandomArbitrary(min, max) {
 }
 function clangSound() {
     let sideways = getRandomArbitrary(1, 3);
-    const audio = new Audio('./music/sound-effect/metalPickaxeClang01.mp3');
+    if(sideways == 1) {
+        const audio = new Audio('./music/sound-effect/metalPickaxeClang01.mp3');
+    } else if(sideways == 2) {
+        const audio = new Audio('./music/sound-effect/metalPickaxeClang02.mp3');
+    } else if(sideways == 3) {
+        const audio = new Audio('./music/sound-effect/metalPickaxeClang02.mp3');
+    }
     audio.volume = volume;
     audio.play();
 }
