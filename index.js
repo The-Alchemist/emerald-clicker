@@ -493,7 +493,7 @@ function updateGame() {
     updateCAC(shop13)
     positionRich(money)
 }
-// thank you, mdn web docs
+/* thank you, mdn web docs */
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
