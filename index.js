@@ -10,6 +10,7 @@ const tooltip = document.querySelector('#tooltip');
 const rich_div = document.querySelector('#rich-div');
 const vol_control = document.querySelector('#volume-control');
 vol_control.value = 100;
+emerald.ondragstart = function() { return false; };
 document.querySelector('#vol-display').innerHTML = vol_control.value;
 vol_control.addEventListener('change', (e)=>{
     document.querySelector('#vol-display').innerHTML = vol_control.value;
@@ -476,6 +477,7 @@ function createShopItem(item) {
             }
         }
     })
+    imag.ondragstart = function() { return false; };
     upgradeItem.appendChild(imag)
     upgradeItem.appendChild(name)
     upgrade_container.appendChild(upgradeItem)
