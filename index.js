@@ -1,5 +1,5 @@
 // lol my code is garbo
-const version_name = "1.1.2a";
+const version_name = "1.2.0a";
 const emerald_container = document.querySelector('#emerald-container');
 const emerald = document.querySelector('#emerald');
 const emerald_count_display = document.querySelector('#emerald-count-display');
@@ -184,7 +184,7 @@ let up2 = {
     desc: "Get another mouse!",
     epc: 1,
     cost: 600,
-    src: "./images/cursor-item.png",
+    src: "./images/icons/cursor-item.png",
     soldout: false,
     special: false,
     upgrade: true
@@ -199,6 +199,16 @@ let up2 = {
     special: false,
     upgrade: true
 }*/
+let up3 = {
+    name: "Jase",
+    desc: "Rodent Clicker.",
+    epc: 10,
+    cost: 5000,
+    src: "./images/icons/jase.png",
+    soldout: false,
+    special: false,
+    upgrade: true
+}
 let up69 = {
     name: "Test",
     desc: "This is the description.",
@@ -540,6 +550,7 @@ createShopItem(shop12)
 createShopItem(shop13)
 createShopItem(up1)
 createShopItem(up2)
+createShopItem(up3)
 let volume;
 setInterval(()=>{
     volume = vol_control.value / 100;
