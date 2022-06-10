@@ -9,6 +9,8 @@ const shop_container = document.querySelector('#shop-container');
 const tooltip = document.querySelector('#tooltip');
 const rich_div = document.querySelector('#rich-div');
 const vol_control = document.querySelector('#volume-control');
+vol_control.value = 100;
+document.querySelector('#vol-display').innerHTML = vol_control.value;
 vol_control.addEventListener('change', (e)=>{
     document.querySelector('#vol-display').innerHTML = vol_control.value;
 })
@@ -490,6 +492,7 @@ function updateGame() {
 }
 function clickSound() {
     const selAud = new Audio('./music/select.mp3');
+    selAud.volume = volume;
     selAud.play();
 }
 emerald.addEventListener('click', (e)=>{
@@ -514,7 +517,9 @@ createShopItem(shop12)
 createShopItem(shop13)
 createShopItem(up1)
 createShopItem(up2)
+let volume;
 setInterval(()=>{
+    volume = vol_control.value / 100;
     money = money + moneyPerSecond;
     updateGame();
 }, 1000);
