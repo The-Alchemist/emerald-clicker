@@ -498,7 +498,7 @@ function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 function clangSound() {
-    let sideways = getRandomArbitrary(1, 3);
+    let sideways = getRandomArbitrary(1, 4);
     if(sideways == 1) {
         const audio = new Audio('./music/sound-effect/metalPickaxeClang01.mp3');
         audio.volume = volume;
