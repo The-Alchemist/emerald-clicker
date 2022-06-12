@@ -172,6 +172,7 @@ let shop13 = {
 }
 let up1 = {
     name: "Mikey Mouse",
+    id: "mikeymouse",
     desc: "It's the least an offbrand can do for you.",
     epc: 1,
     cost: 500,
@@ -182,6 +183,7 @@ let up1 = {
 }
 let up2 = {
     name: "Another Mouse",
+    id: "anothermouse",
     desc: "Get another mouse!",
     epc: 1,
     cost: 600,
@@ -202,6 +204,7 @@ let up2 = {
 }*/
 let up3 = {
     name: "Jase",
+    id: "jase",
     desc: "Rodent Clicker.",
     epc: 10,
     cost: 5000,
@@ -430,7 +433,7 @@ function createShopItem(item) {
     name.innerHTML = item['name']
     imag.src = item['src']
     imag.style = "width: 40px; height: 40px; position: relative; top: 50%; left: 5px; transform: translate(0px, -50%);"
-    upgradeItem.id = item['name'] + "up"
+    upgradeItem.id = item['id'] + "up"
     upgradeItem.classList.add('upgrade-item')
     upgradeItem.addEventListener('mouseenter', (e)=>{
         clickSound()
@@ -562,3 +565,211 @@ setInterval(()=>{
     updateGame();
 }, 1000);
 updateGame();
+function s(string) {
+    return string+"|"
+}
+/* times 
+0) money
+1) moneyperclick
+2) moneypersecond
+3) shop1['cost']
+4) shop1['has']
+5) shop2['cost']
+6) shop2['has']
+7) shop3['cost']
+8) shop3['has']
+9) shop4['cost']
+10) shop4['has']
+11) shop5['cost']
+12) shop5['has']
+13) shop6['cost']
+14) shop6['has']
+15) shop7['cost']
+16) shop7['has']
+17) shop8['cost']
+18) shop8['has']
+19) shop9['cost']
+20) shop9['has']
+21) shop10['cost']
+22) shop10['has']
+23) shop11['cost']
+24) shop11['has']
+25) shop12['cost']
+26) shop12['has']
+27) shop13['cost']
+28) shop13['has']
+*/
+const prin = function(string) {
+    return parseInt(string)
+}
+function load(string) {
+    let on = 0;
+    let ram = "";
+    for(let i = 0;; i++) {
+        if(string.charAt(i) == "|") {
+            if(on == 0) {
+                money = prin(ram)
+                ram = "";
+                on++
+            } else if (on == 1) {
+                moneyPerClick = prin(ram)
+                ram = "";
+                on++
+            } else if (on == 2) {
+                moneyPerSecond = prin(ram)
+                ram = "";
+                on++
+            } else if (on == 3) {
+                shop1['cost'] = prin(ram)
+                ram = "";
+                on++
+            } else if (on == 4) {
+                shop1['has'] = prin(ram)
+                ram = "";
+                on++
+            } else if (on == 5) {
+                shop2['cost'] = prin(ram)
+                ram = "";
+                on++
+            } else if (on == 6) {
+                shop2['has'] = prin(ram)
+                ram = "";
+                on++
+            } else if(on == 7) {
+                shop3['cost'] = prin(ram)
+                ram = "";
+                on++
+            } else if(on == 8) {
+                shop3['has'] = prin(ram)
+                ram="";
+                on++
+            } else if(on == 9) {
+                shop4['cost'] = prin(ram)
+                ram="";
+                on++
+            } else if(on == 10) {
+                shop4['has'] = prin(ram)
+                ram="";
+                on++
+            } else if (on == 11) {
+                shop5['cost'] = prin(ram)
+                ram="";
+                on++
+            } else if (on == 12) {
+                shop5['has'] = prin(ram);
+                ram="";
+                on++
+            } else if (on == 13) {
+                shop6['cost'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 14) {
+                shop6['has'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 15) {
+                shop7['cost'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 16) {
+                shop7['has'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 17) {
+                shop8['cost'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 18) {
+                shop8['has'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 19) {
+                shop9['cost'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 20) {
+                shop9['has'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 21) {
+                shop10['cost'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 22) {
+                shop10['has'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 23) {
+                shop11['cost'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 24) {
+                shop11['has'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 25) {
+                shop12['cost'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 26) {
+                shop12['has'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 27) {
+                shop13['cost'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 28) {
+                shop13['has'] = prin(ram)
+                ram="";
+                on++
+            }else if (on == 29) {
+                if(ram=="1"){
+                    up1['soldout'] = true;
+                    $("#mikeymouseup").remove()
+                }else{
+
+                }
+                ram="";
+                on++
+            }else if (on == 30) {
+                if(ram=="1"){
+                    up2['soldout'] = true;
+                    $("#anothermouseup").remove()
+                }else{
+
+                }
+                ram="";
+                on++
+            }else if (on == 31) {
+                if(ram=="1"){
+                    up3['soldout'] = true;
+                    $("#jaseup").remove()
+                }else{
+
+                }
+                ram="";
+                on++
+            }
+        } else if(string.charAt(i) != "") {
+            ram += string.charAt(i)
+        } else {
+            break
+        }
+    }
+}
+function save() {
+    prompt('Save this file. It contains your save.', 
+    s(money) + s(moneyPerClick) + s(moneyPerSecond) +
+    s(shop1['cost']) + s(shop1['has']) + s(shop2['cost']) +
+    s(shop2['has']) + s(shop3['cost']) + s(shop3['has']) +
+    s(shop4['cost']) + s(shop4['has']) + s(shop5['cost']) +
+    s(shop5['has']) + s(shop6['cost']) + s(shop6['has']) +
+    s(shop7['cost']) + s(shop7['has']) + s(shop8['cost']) + 
+    s(shop8['has']) + s(shop9['cost']) + s(shop9['has']) +
+    s(shop10['cost']) + s(shop10['has']) + s(shop11['cost']) +
+    s(shop11['has']) + s(shop12['cost']) + s(shop12['has']) +
+    s(shop13['cost']) + s(shop13['has']) + s(up1['soldout'] + 0) +
+    s(up2['soldout'] + 0) + s(up3['soldout'] + 0)
+    )
+}
