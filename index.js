@@ -276,7 +276,7 @@ function positionTooltip(e){
     } else {
         xpos = (e.clientX + tooltip_margin);
     } if (e.clientY > window.innerHeight - 400) {
-        ypos = (e.clientY) - (parseInt($('#tooltip').css('height').replace("px", "")) - tooltip_margin);
+        ypos = (e.clientY) - (parseInt($('#tooltip').css('height').replace("px", "")) - (tooltip_margin * 2));
     } else {
         ypos = (e.clientY + tooltip_margin);
     }
