@@ -1,5 +1,6 @@
 // lol my code is garbo
 const version_name = "1.2.0a";
+const tooltip_margin = 20;
 const emerald_container = document.querySelector('#emerald-container');
 const emerald = document.querySelector('#emerald');
 const emerald_count_display = document.querySelector('#emerald-count-display');
@@ -271,13 +272,13 @@ document.addEventListener('mousemove', (e)=>{
 })
 function positionTooltip(e){
     if(e.clientX > window.innerWidth - 200) {
-        xpos = (e.clientX - 12) - (parseInt($('#tooltip').css('width').replace("px", "")));
+        xpos = (e.clientX - tooltip_margin) - (parseInt($('#tooltip').css('width').replace("px", "")));
     } else {
-        xpos = (e.clientX + 12);
+        xpos = (e.clientX + tooltip_margin);
     } if (e.clientY > window.innerHeight - 400) {
-        ypos = (e.clientY) - (parseInt($('#tooltip').css('height').replace("px", "")) - 12);
+        ypos = (e.clientY) - (parseInt($('#tooltip').css('height').replace("px", "")) - tooltip_margin);
     } else {
-        ypos = (e.clientY + 12);
+        ypos = (e.clientY + tooltip_margin);
     }
     if(!low_fps_tooltip) {
         $('#tooltip').css('top', ypos + "px")
