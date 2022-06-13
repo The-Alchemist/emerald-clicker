@@ -1,5 +1,5 @@
 // lol my code is garbo
-const version_name = "1.2.0a";
+const version_name = "1.2.1.1a";
 const tooltip_margin = 20;
 const emerald_container = document.querySelector('#emerald-container');
 const emerald = document.querySelector('#emerald');
