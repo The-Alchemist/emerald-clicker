@@ -1,6 +1,6 @@
 // lol my code is garbo
 const version_name = "1.3.0a";
-const tooltip_margin = 20;
+const tooltip_margin = 18;
 const emerald_container = document.querySelector('#emerald-container');
 const emerald = document.querySelector('#emerald');
 const emerald_count_display = document.querySelector('#emerald-count-display');
@@ -516,6 +516,7 @@ function updateGame() {
     updateCAC(shop11)
     updateCAC(shop12)
     updateCAC(shop13)
+    updateCAC(shop14)
     positionRich(money)
 }
 /* thank you, mdn web docs :)*/
@@ -563,6 +564,7 @@ createShopItem(shop10)
 createShopItem(shop11)
 createShopItem(shop12)
 createShopItem(shop13)
+createShopItem(shop14)
 createShopItem(up1)
 createShopItem(up2)
 createShopItem(up3)
