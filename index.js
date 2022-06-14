@@ -20,10 +20,9 @@ short_numbers_div.addEventListener('mouseout', (e)=>{
     tooltip.hidden = true;
 })
 short_numbers_check.addEventListener('change', (e)=>{
-    if(e.checked == true) {
+    if(short_numbers_check.checked) {
         shortnumbers = true;
-    }
-    else if (e.checked == false) {
+    } else {
         shortnumbers = false;
     }
 })
