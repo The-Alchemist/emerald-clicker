@@ -1,5 +1,5 @@
 // lol my code is garbo
-const version_name = "1.2.1.1a";
+const version_name = "1.3.0a";
 const tooltip_margin = 20;
 const emerald_container = document.querySelector('#emerald-container');
 const emerald = document.querySelector('#emerald');
@@ -10,7 +10,30 @@ const shop_container = document.querySelector('#shop-container');
 const tooltip = document.querySelector('#tooltip');
 const rich_div = document.querySelector('#rich-div');
 const vol_control = document.querySelector('#volume-control');
+const short_numbers_div = document.querySelector('#short-numbers-div');
+const short_numbers_check = document.querySelector('#short-numbers-checkbox');
+short_numbers_div.addEventListener('mousemove', (e)=>{
+    tooltip.innerHTML = "<a><b>Short Numbers</b></a><br><a>Just makes numbers more readable, and shorter.</a>"
+    tooltip.hidden = false;
+})
+short_numbers_div.addEventListener('mouseout', (e)=>{
+    tooltip.hidden = true;
+})
+short_numbers_check.addEventListener('change', (e)=>{
+    if(e.checked == true) {
+        shortnumbers = true;
+    }
+    else if (e.checked == false) {
+        shortnumbers = false;
+    }
+})
+let shortnumbers = true;
 vol_control.value = 100;
+function doTheFormat(thing) {
+    if(shortnumbers) {
+        return new Intl.NumberFormat(undefined, {notation: "compact",compactDisplay: "long"}).format(thing)
+    }
+}
 emerald.ondragstart = function() { return false; };
 document.querySelector('#vol-display').innerHTML = vol_control.value;
 vol_control.addEventListener('change', (e)=>{
@@ -171,6 +194,15 @@ let shop13 = {
     cost: 69000,
     upgrade: false
 }
+let shop14 = {
+    name: "WDMS Router",
+    desc: "Hijack the router to mine crypto-emeralds, trading them for real emeralds.",
+    mps: 300,
+    costMulti: 1.4,
+    has: 0,
+    cost: 100000,
+    upgrade: false
+}
 let up1 = {
     name: "Mikey Mouse",
     id: "mikeymouse",
@@ -260,10 +292,7 @@ function updateCAC(item) {
     const itemcount = window[item['name'] + "count"]
     const itemcost = window[item['name']+"cost"]
     itemcount.innerHTML = "You have: " + item['has'] + "."
-    itemcost.innerHTML = ' Cost: ' + new Intl.NumberFormat(undefined, {
-        notation: "compact",
-        compactDisplay: "long"
-    }).format(item['cost']) + " Emeralds"
+    itemcost.innerHTML = ' Cost: ' + doTheFormat(item['cost']) + " Emeralds"
 }
 let xpos;
 let ypos;
@@ -396,22 +425,13 @@ function createShopItem(item) {
     shopItem.addEventListener('mousemove', (e)=>{
         tooltip.hidden = false;
         if(money < item['cost']) {
-            canbuy = "<span style='color: darkred;'>You can't buy this item. You need " + new Intl.NumberFormat(undefined, {
-                notation: "compact",
-                compactDisplay: "long"
-            }).format((item['cost'] - money)) + " more emeralds.</span>"
+            canbuy = "<span style='color: darkred;'>You can't buy this item. You need " + doTheFormat(item['cost'] - money) + " more emeralds.</span>"
         } else if (money == item['cost']) {
             canbuy = "<span style='color: goldenrod;'>You can buy this item, but it will leave you with no more emeralds.</span>"
         } else if (money > item['cost']) {
-            canbuy = "<span style='color: green'>You can buy this item, and it will leave you with " + new Intl.NumberFormat(undefined, {
-                notation: "compact",
-                compactDisplay: "long"
-            }).format((money - item['cost'])) + " emeralds left over.</span>"
+            canbuy = "<span style='color: green'>You can buy this item, and it will leave you with " + doTheFormat(money - item['cost']) + " emeralds left over.</span>"
         }
-        tooltip.innerHTML = "<a style='font-size: 18;'><b>" + item['name'] + "</b></a><br><a>" + item['desc'] + "</a><br><a>Cost: " + new Intl.NumberFormat(undefined, {
-            notation: "compact",
-            compactDisplay: "long"
-        }).format(item['cost']) + " Emeralds</a><br><a>You have: " + item['has'] + ".</a><br><a>This adds " + item['mps'] + " Emeralds Per Second.</a><br><a>" + canbuy + "</a>";
+        tooltip.innerHTML = "<a style='font-size: 18;'><b>" + item['name'] + "</b></a><br><a>" + item['desc'] + "</a><br><a>Cost: " + doTheFormat(item['cost']) + " Emeralds</a><br><a>You have: " + item['has'] + ".</a><br><a>This adds " + item['mps'] + " Emeralds Per Second.</a><br><a>" + canbuy + "</a>";
         
     })
     shopItem.addEventListener('mouseenter', (e)=>{
@@ -446,25 +466,16 @@ function createShopItem(item) {
             soldout = ""
         }
         if(money < item['cost']) {
-            canbuy = "<span style='color: darkred;'>You can't buy this item. You need " + new Intl.NumberFormat(undefined, {
-                notation: "compact",
-                compactDisplay: "long"
-            }).format((item['cost'] - money)) + " more emeralds.</span>"
+            canbuy = "<span style='color: darkred;'>You can't buy this item. You need " + doTheFormat(item['cost'] - money) + " more emeralds.</span>"
         } else if (money == item['cost']) {
             canbuy = "<span style='color: goldenrod;'>You can buy this item, but it will leave you with no more emeralds.</span>"
         } else if (money > item['cost']) {
-            canbuy = "<span style='color: green'>You can buy this item, and it will leave you with " + new Intl.NumberFormat(undefined, {
-                notation: "compact",
-                compactDisplay: "long"
-            }).format((money - item['cost'])) + " emeralds left over.</span>"
+            canbuy = "<span style='color: green'>You can buy this item, and it will leave you with " + doTheFormat(money - item['cost']) + " emeralds left over.</span>"
         }
         tooltip.hidden = false;
         
         if(!item['soldout']) {
-        tooltip.innerHTML = '<a style="font-size: 18;"><b>' + item['name'] + '</b></a><br><a>' + item['desc'] + '</a><br><a>Cost: ' + new Intl.NumberFormat(undefined, {
-            notation: "compact",
-            compactDisplay: "long"
-        }).format(item['cost']) + ' Emeralds</a><br><a>This adds ' + item['epc'] + ' Emeralds Per Click.</a><br><a>' + canbuy + '</a>' + soldout
+        tooltip.innerHTML = '<a style="font-size: 18;"><b>' + item['name'] + '</b></a><br><a>' + item['desc'] + '</a><br><a>Cost: ' + doTheFormat(item['cost']) + ' Emeralds</a><br><a>This adds ' + item['epc'] + ' Emeralds Per Click.</a><br><a>' + canbuy + '</a>' + soldout
     } else {
         tooltip.innerHTML = '<a><b>' + item['name'] + '</b></a><a>' + soldout + '</a>';
     }
@@ -488,10 +499,7 @@ function createShopItem(item) {
 }
 }
 function updateGame() {
-    emerald_count_display.innerHTML = 'Emeralds: ' + new Intl.NumberFormat(undefined, {
-        notation: "compact",
-        compactDisplay: "long"
-    }).format(money);
+    emerald_count_display.innerHTML = 'Emeralds: ' + doTheFormat(money);
     emerald_per_second_display.innerHTML = 'Emeralds per second: ' + new Intl.NumberFormat().format(moneyPerSecond);
     emerald_per_click_display.innerHTML = 'Emeralds per click: ' + new Intl.NumberFormat().format(moneyPerClick)
     updateCAC(shop1)
@@ -751,6 +759,14 @@ function load(string) {
                 }
                 ram="";
                 on++
+            } else if (on == 32) {
+                shop14['cost'] = prin(ram)
+                ram=""
+                on++
+            } else if (on == 33) {
+                shop14['has'] = prin(ram)
+                ram=""
+                on++
             }
         } else if(string.charAt(i) != "") {
             ram += string.charAt(i)
@@ -771,6 +787,7 @@ function save() {
     s(shop10['cost']) + s(shop10['has']) + s(shop11['cost']) +
     s(shop11['has']) + s(shop12['cost']) + s(shop12['has']) +
     s(shop13['cost']) + s(shop13['has']) + s(up1['soldout'] + 0) +
-    s(up2['soldout'] + 0) + s(up3['soldout'] + 0)
+    s(up2['soldout'] + 0) + s(up3['soldout'] + 0) + s(shop14['cost']) +
+    s(shop14['has'])
     )
 }
