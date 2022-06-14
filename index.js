@@ -26,7 +26,7 @@ short_numbers_check.addEventListener('change', (e)=>{
         shortnumbers = false;
     }
 })
-let shortnumbers = true;
+let shortnumbers = false;
 vol_control.value = 100;
 function doTheFormat(thing) {
     if(shortnumbers) {
