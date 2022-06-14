@@ -196,7 +196,7 @@ let shop13 = {
     upgrade: false
 }
 let shop14 = {
-    name: "WDMS Router",
+    name: "School Router",
     desc: "Hijack the router to mine crypto-emeralds, trading them for real emeralds.",
     mps: 300,
     costMulti: 1.4,
