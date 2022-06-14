@@ -33,7 +33,7 @@
             <button onclick="money = money + parseInt(document.querySelector('#addEms').value)">Add</button>
         </div>
         <div id="option-container">
-            <div hidden></div><a href="javascript:(()=>{save()})();" style="cursor: url('./images/cur2.png') 5 0, pointer;">Save Game</a> <a href="javascript:(()=>{let prompting = prompt('Enter your save:'); load(prompting)})();" style="cursor: url('./images/cur2.png') 5 0, pointer;">Load Game</a></div>
+            <div hidden><a href="javascript:(()=>{save()})();" style="cursor: url('./images/cur2.png') 5 0, pointer;">Save Game</a> <a href="javascript:(()=>{let prompting = prompt('Enter your save:'); load(prompting)})();" style="cursor: url('./images/cur2.png') 5 0, pointer;">Load Game</a></div>
             <div id="buttonz">
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#credits-div').hidden = false;" id="credits">Credits</button><br>
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#settings-div').hidden = false;" id="settings">Settings</button><br>
