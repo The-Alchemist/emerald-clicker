@@ -31,6 +31,8 @@ vol_control.value = 100;
 function doTheFormat(thing) {
     if(shortnumbers) {
         return new Intl.NumberFormat(undefined, {notation: "compact",compactDisplay: "long"}).format(thing)
+    } else {
+        return new Intl.NumberFormat().format(thing)
     }
 }
 emerald.ondragstart = function() { return false; };
