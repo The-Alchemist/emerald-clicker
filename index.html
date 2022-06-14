@@ -38,7 +38,7 @@
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#credits-div').hidden = false;" id="credits">Credits</button><br>
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#settings-div').hidden = false;" id="settings">Settings</button><br>
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#modcheck-div').hidden = false;" id="modcheck-button">Mod Check</button><br>
-                <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#download-div').hidden = false;" id="download-enter" hidden>Downloads</button>
+                <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#download-div').hidden = false;" id="download-enter">Saves</button>
             </div>
             <div id="credits-div" hidden>
                 <button onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#credits-div').hidden = true;" id="close-credits">Close</button><br>
@@ -52,7 +52,8 @@
             </div> 
             <div id="download-div" hidden>
                 <button onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#download-div').hidden = true;" id="download-button-c">Close</button><br>
-                <a>Soon, you can download the game!</a>
+                <button onclick="save()" class="wide-one">Save Game</button>
+                <button onclick="let loliamsocool = prompt('Load a Save:'); load(loliamsocool);">Load Game</button>
             </div>
             <div id="settings-div" hidden>
                 <button onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#settings-div').hidden = true;document.querySelector('#buttonz').hidden = false;document.querySelector('#credits-div').hidden = true;">Close</button><br>

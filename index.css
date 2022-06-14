@@ -217,6 +217,15 @@
 #credits:hover {
     max-width: 150px;
 }
+.wide-one {
+    width: 100%;
+    height: 30px;
+    max-width: 90px;
+    transition: max-width 120ms ease-out;
+}
+.wide-one:hover {
+    max-width: 150px;
+}
 @keyframes up {
     from{}
     to{top: 69px;}
