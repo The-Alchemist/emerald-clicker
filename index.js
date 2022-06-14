@@ -779,7 +779,7 @@ function load(string) {
     }
 }
 function save() {
-    prompt('Save this file. It contains your save.', 
+    prompt('Save this file somewhere safe, after all it contains your save.', 
     s(money) + s(moneyPerClick) + s(moneyPerSecond) +
     s(shop1['cost']) + s(shop1['has']) + s(shop2['cost']) +
     s(shop2['has']) + s(shop3['cost']) + s(shop3['has']) +
