@@ -33,7 +33,7 @@
             <button onclick="money = money + parseInt(document.querySelector('#addEms').value)">Add</button>
         </div>
         <div id="option-container">
-            <a href="javascript:(()=>{save()})();" style="cursor: url('./images/cur2.png') 5 0, pointer;">Save Game</a> <a href="javascript:(()=>{let prompting = prompt('Enter your save:'); load(prompting)})();" style="cursor: url('./images/cur2.png') 5 0, pointer;">Load Game</a>
+            <div hidden></div><a href="javascript:(()=>{save()})();" style="cursor: url('./images/cur2.png') 5 0, pointer;">Save Game</a> <a href="javascript:(()=>{let prompting = prompt('Enter your save:'); load(prompting)})();" style="cursor: url('./images/cur2.png') 5 0, pointer;">Load Game</a></div>
             <div id="buttonz">
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#credits-div').hidden = false;" id="credits">Credits</button><br>
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#settings-div').hidden = false;" id="settings">Settings</button><br>
@@ -52,7 +52,7 @@
             </div> 
             <div id="download-div" hidden>
                 <button onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#download-div').hidden = true;" id="download-button-c">Close</button><br>
-                <a><b>Saves</b></a>
+                <a><b>Saves Center</b></a><br>
                 <a>You can save your game.</a>
                 <button onclick="save()" class="wide-one">Save Game</button><br>
                 <button class="wide-one" onclick="let loliamsocool = prompt('Load a Save:'); load(loliamsocool);">Load Game</button>
