@@ -806,8 +806,8 @@ function load(string) {
                 ram=""
                 on++
             } else if (on == 35) {
-                shop15['cost'] = prin(ram)
-                ram = ""
+                shop15['cost'] = prin(ram);
+                ram=""
                 on++
             } else if (on == 36) {
                 shop15['has'] = prin(ram)
