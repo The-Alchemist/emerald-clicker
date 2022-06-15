@@ -251,6 +251,12 @@
 button {
     cursor: url('./images/cur2.png') 5 0, pointer;
 }
+#ruby-count {
+    vertical-align: middle;
+}
+#ruby-thing {
+    vertical-align: middle;
+}
 body {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     overflow-y: hidden;

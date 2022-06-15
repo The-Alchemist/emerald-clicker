@@ -1,6 +1,8 @@
 // lol my code is garbo
-const version_name = "1.3.0a";
+const version_name = "v1.4.0a";
 const tooltip_margin = 18;
+let rubies = 0;
+let rubylock = false;
 const emerald_container = document.querySelector('#emerald-container');
 const emerald = document.querySelector('#emerald');
 const emerald_count_display = document.querySelector('#emerald-count-display');
@@ -12,6 +14,9 @@ const rich_div = document.querySelector('#rich-div');
 const vol_control = document.querySelector('#volume-control');
 const short_numbers_div = document.querySelector('#short-numbers-div');
 const short_numbers_check = document.querySelector('#short-numbers-checkbox');
+const ruby_counter_container = document.querySelector('#ruby-counter-container');
+const ruby_count = document.querySelector('#ruby-count');
+let rubylockdis;
 short_numbers_div.addEventListener('mousemove', (e)=>{
     tooltip.innerHTML = "<a><b>Short Numbers</b></a><br><a>Just makes numbers more readable, and shorter.</a>"
     tooltip.hidden = false;
@@ -35,7 +40,21 @@ function doTheFormat(thing) {
         return new Intl.NumberFormat().format(thing)
     }
 }
+ruby_counter_container.addEventListener('mousemove', (e)=>{
+    if(rubylock) {
+        rubylockdis = "<span style='color: green;'>Ruby shards are unlocked. You can collect them.</span>"
+    } else {
+        rubylockdis = "<span style='color: darkred;'>Ruby shards are locked. You are not able to collect them.</span>"
+    }
+    tooltip.hidden = false;
+    tooltip.innerHTML = "<a><b>Ruby Shards</b></a><br><a>You can do amazing things with them, but there's a 1 in 100,000 chance of you getting one on a click.</a><br><a>" + rubylockdis + "</a>";
+})
+ruby_counter_container.addEventListener('mouseout', (e)=>{
+    tooltip.hidden = true;
+})
 emerald.ondragstart = function() { return false; };
+document.querySelector('#logo-png').ondragstart = function() { return false; };
+document.querySelector("#ruby-thing").ondragstart = function() { return false; };
 document.querySelector('#vol-display').innerHTML = vol_control.value;
 vol_control.addEventListener('change', (e)=>{
     document.querySelector('#vol-display').innerHTML = vol_control.value;
@@ -202,6 +221,15 @@ let shop14 = {
     costMulti: 1.4,
     has: 0,
     cost: 100000,
+    upgrade: false
+}
+let shop15 = {
+    name: "School Chromebook",
+    desc: "2GB of ram. 16GB of local storage. It'll do.",
+    mps: 400,
+    costMulti: 1.4,
+    has: 0,
+    cost: 120000,
     upgrade: false
 }
 let up1 = {
@@ -517,7 +545,9 @@ function updateGame() {
     updateCAC(shop12)
     updateCAC(shop13)
     updateCAC(shop14)
+    updateCAC(shop15)
     positionRich(money)
+    ruby_count.innerHTML = rubies;
 }
 /* thank you, mdn web docs :)*/
 function getRandomArbitrary(min, max) {
@@ -565,6 +595,7 @@ createShopItem(shop11)
 createShopItem(shop12)
 createShopItem(shop13)
 createShopItem(shop14)
+createShopItem(shop15)
 createShopItem(up1)
 createShopItem(up2)
 createShopItem(up3)
@@ -770,6 +801,18 @@ function load(string) {
                 shop14['has'] = prin(ram)
                 ram=""
                 on++
+            } else if (on == 34) {
+                rubies = prin(ram);
+                ram=""
+                on++
+            } else if (on == 35) {
+                shop15['cost'] = prin(ram)
+                ram = ""
+                on++
+            } else if (on == 36) {
+                shop15['has'] = prin(ram)
+                ram=""
+                on++
             }
         } else if(string.charAt(i) != "") {
             ram += string.charAt(i)
@@ -791,6 +834,6 @@ function save() {
     s(shop11['has']) + s(shop12['cost']) + s(shop12['has']) +
     s(shop13['cost']) + s(shop13['has']) + s(up1['soldout'] + 0) +
     s(up2['soldout'] + 0) + s(up3['soldout'] + 0) + s(shop14['cost']) +
-    s(shop14['has'])
+    s(shop14['has']) + s(rubies) + s(shop15['cost']) + s(shop15['has'])
     )
 }
