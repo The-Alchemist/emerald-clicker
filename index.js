@@ -1,5 +1,5 @@
 // lol my code is garbo
-const version_name = "v1.4.0a";
+const version_name = "v1.5.0a";
 const tooltip_margin = 18;
 let rubies = 0;
 let rubylock = false;
@@ -21,6 +21,13 @@ short_numbers_div.addEventListener('mousemove', (e)=>{
     tooltip.innerHTML = "<a><b>Short Numbers</b></a><br><a>Just makes numbers more readable, and shorter.</a>"
     tooltip.hidden = false;
 })
+function openRubyShop() {
+    if(!rubylock) { alert('Ruby shards are locked. Maybe get more emeralds?'); return }
+    document.querySelector('#ruby-shop-container').hidden = false;
+}
+function closeRubyShop() {
+    document.querySelector('#ruby-shop-container').hidden = true;
+}
 short_numbers_div.addEventListener('mouseout', (e)=>{
     tooltip.hidden = true;
 })
@@ -47,7 +54,7 @@ ruby_counter_container.addEventListener('mousemove', (e)=>{
         rubylockdis = "<span style='color: darkred;'>Ruby shards are locked. You are not able to collect them.</span>"
     }
     tooltip.hidden = false;
-    tooltip.innerHTML = "<a><b>Ruby Shards</b></a><br><a>You can do amazing things with them, but there's a 1 in 100,000 chance of you getting one on a click.</a><br><a>" + rubylockdis + "</a>";
+    tooltip.innerHTML = "<a><b>Ruby Shards</b></a><br><a>You can do amazing things with them, but there's a 1 in 10,000 chance of you getting one on a click.</a><br><a>" + rubylockdis + "</a>";
 })
 ruby_counter_container.addEventListener('mouseout', (e)=>{
     tooltip.hidden = true;
@@ -104,6 +111,7 @@ let shop1 = {
     costMulti: 1.4,
     has: 0,
     cost: 10,
+    rubyItem: false,
     upgrade: false
 }
 let shop2 = {
@@ -113,6 +121,7 @@ let shop2 = {
     costMulti: 1.4,
     has: 0,
     cost: 50,
+    rubyItem: false,
     upgrade: false
 }
 let shop3 = {
@@ -122,6 +131,7 @@ let shop3 = {
     costMulti: 1.4,
     has: 0,
     cost: 250,
+    rubyItem: false,
     upgrade: false
 }
 let shop4 = {
@@ -131,6 +141,7 @@ let shop4 = {
     costMulti: 1.4,
     has: 0,
     cost: 1500,
+    rubyItem: false,
     upgrade: false
 }
 let shop5 = {
@@ -140,6 +151,7 @@ let shop5 = {
     costMulti: 1.4,
     has: 0,
     cost: 2750,
+    rubyItem: false,
     upgrade: false
 }
 let shop6 = {
@@ -149,6 +161,7 @@ let shop6 = {
     costMulti: 1.4,
     has: 0,
     cost: 4750,
+    rubyItem: false,
     upgrade: false
 }
 let shop7 = {
@@ -158,6 +171,7 @@ let shop7 = {
     costMulti: 1.4,
     has: 0,
     cost: 10000,
+    rubyItem: false,
     upgrade: false
 }
 let shop8 = {
@@ -167,6 +181,7 @@ let shop8 = {
     costMulti: 1.4,
     has: 0,
     cost: 15000,
+    rubyItem: false,
     upgrade: false
 }
 let shop9 = {
@@ -176,6 +191,7 @@ let shop9 = {
     costMulti: 1.4,
     has: 0,
     cost: 30000,
+    rubyItem: false,
     upgrade: false
 }
 let shop10 = {
@@ -185,6 +201,7 @@ let shop10 = {
     costMulti: 1.4,
     has: 0,
     cost: 35000,
+    rubyItem: false,
     upgrade: false
 }
 let shop11 = {
@@ -194,6 +211,7 @@ let shop11 = {
     costMulti: 1.4,
     has: 0,
     cost: 45000,
+    rubyItem: false,
     upgrade: false
 }
 let shop12 = {
@@ -203,6 +221,7 @@ let shop12 = {
     costMulti: 1.4,
     has: 0,
     cost: 55000,
+    rubyItem: false,
     upgrade: false
 }
 let shop13 = {
@@ -212,6 +231,7 @@ let shop13 = {
     costMulti: 1.4,
     has: 0,
     cost: 69000,
+    rubyItem: false,
     upgrade: false
 }
 let shop14 = {
@@ -221,6 +241,7 @@ let shop14 = {
     costMulti: 1.4,
     has: 0,
     cost: 100000,
+    rubyItem: false,
     upgrade: false
 }
 let shop15 = {
@@ -230,6 +251,7 @@ let shop15 = {
     costMulti: 1.4,
     has: 0,
     cost: 120000,
+    rubyItem: false,
     upgrade: false
 }
 let up1 = {
@@ -275,6 +297,16 @@ let up3 = {
     special: false,
     upgrade: true
 }
+let ruby1 = {
+    name: "Ruby Pickaxe",
+    desc: "Ruby Pickaxes are WAY more valuable!",
+    mps: 100000,
+    costMulti: 2,
+    has: 0,
+    cost: 1,
+    upgrade: false,
+    rubyItem: true
+}
 let up69 = {
     name: "Test",
     desc: "This is the description.",
@@ -317,11 +349,14 @@ emerald.addEventListener('mouseup', (e)=>{
     setTimeout(()=>{$('#emerald').css('max-width', 300); $('#emerald').css('max-height', 200)}, 50)
 })
 function nofunc() {}
+let ending;
 function updateCAC(item) {
+    if(item['rubyItem']) { ending = " Ruby Shards" } else {ending = " Emeralds"}
     const itemcount = window[item['name'] + "count"]
     const itemcost = window[item['name']+"cost"]
     itemcount.innerHTML = "You have: " + item['has'] + "."
-    itemcost.innerHTML = ' Cost: ' + doTheFormat(item['cost']) + " Emeralds"
+
+    itemcost.innerHTML = ' Cost: ' + doTheFormat(item['cost']) + ending
 }
 let xpos;
 let ypos;
@@ -363,10 +398,24 @@ document.querySelector('#low-fps-tooltip').addEventListener('click', (e)=>{
     }
 })
 function processPurchase(item, obj) {
+    if(!item['rubyItem']) {
     if(money < item['cost'] || item['soldout']){
         return false
     }
+}
     if(!item['upgrade']){
+        if(item['rubyItem']) {
+            if(rubies < item['cost']) {
+                return false
+            }
+            rubies = rubies - item['cost']
+            moneyPerSecond = moneyPerSecond + item['mps']
+            item['cost'] = item['cost'] * item['costMulti']
+            item['cost'] = Math.round(1*item['cost'])/1;
+            item['has']++
+            updateGame()
+            return
+        }
     money = money - item['cost'];
     // EFFECT!!!!!
     moneyPerSecond = moneyPerSecond + item['mps']
@@ -430,6 +479,8 @@ document.querySelector('#music-option-div').addEventListener('mouseout', (e)=>{
 document.querySelector('#modcheck-button').addEventListener('mouseenter', (e)=>{clickSound()});
 document.querySelector('#settings').addEventListener('mouseenter', (e)=>{clickSound()});
 document.querySelector('#credits').addEventListener('mouseenter', (e)=>{clickSound()});
+document.querySelector('#ruby-shop-button').addEventListener('mouseenter', (e)=>{clickSound()});
+document.querySelector('#download-enter').addEventListener('mouseenter', (e)=>{clickSound()});
 document.querySelector('#downloadFolder').addEventListener('mouseenter', (e)=>{clickSound()});
 document.querySelector('#byMe').addEventListener('mouseenter', (e)=>{clickSound()});
 function createShopItem(item) {
@@ -437,6 +488,46 @@ function createShopItem(item) {
     let soldout;
     // do this if this is NOT an upgrade
     if(item['upgrade']==false) {
+        if(item['rubyItem']==true) {
+            const rubyItem = document.createElement('div');
+            rubyItem.classList.add('shop-item');
+            rubyItem.innerHTML = '<a style="font-size: 18;"><b>' + item['name'] + '</b></a> <br><a>' + item['desc'] + '</a>';
+            const costOfThat = document.createElement('a');
+            const br = document.createElement('br')
+            const br2 = document.createElement('br')
+            const count = document.createElement('a')
+            count.id = item['name'] + "count";
+            count.innerHTML = "You have " 
+            costOfThat.id = item['name'] + "cost";
+            costOfThat.innerHTML = ' Cost: ' + doTheFormat(item['cost']);
+            rubyItem.addEventListener('click', (e)=>{
+                processPurchase(item)
+            })
+            rubyItem.addEventListener('mousemove', (e)=>{
+                tooltip.hidden = false;
+                if(rubies < item['cost']) {
+                    canbuy = "<span style='color: darkred;'>You can't buy this item. You need " + doTheFormat(item['cost'] - money) + " more ruby shards.</span>"
+                } else if (rubies == item['cost']) {
+                    canbuy = "<span style='color: goldenrod;'>You can buy this item, but it will leave you with no more ruby shards.</span>"
+                } else if (rubies > item['cost']) {
+                    canbuy = "<span style='color: green'>You can buy this item, and it will leave you with " + doTheFormat(money - item['cost']) + " ruby shards left over.</span>"
+                }
+                tooltip.innerHTML = "<a style='font-size: 18;'><b>" + item['name'] + "</b></a><br><a>" + item['desc'] + "</a><br><a>Cost: " + doTheFormat(item['cost']) + " Ruby Shards</a><br><a>You have: " + item['has'] + ".</a><br><a>This adds " + doTheFormat(item['mps']) + " Emeralds Per Second.</a><br><a>" + canbuy + "</a>";
+                
+            })
+            rubyItem.addEventListener('mouseenter', (e)=>{
+                clickSound()
+            })
+            rubyItem.addEventListener('mouseout', (e)=>{
+                tooltip.hidden = true;
+            })
+            document.querySelector('#ruby-shop').appendChild(rubyItem)
+            rubyItem.appendChild(br2)
+            rubyItem.appendChild(costOfThat)
+            rubyItem.appendChild(br)
+            rubyItem.appendChild(count) 
+            return
+        }
     const shopItem = document.createElement('div');
     shopItem.classList.add('shop-item');
     shopItem.innerHTML = '<a style="font-size: 18;"><b>' + item['name'] + '</b></a> <br><a>' + item['desc'] + '</a>';
@@ -447,7 +538,7 @@ function createShopItem(item) {
     count.id = item['name'] + "count";
     count.innerHTML = "You have " 
     costOfThat.id = item['name'] + "cost";
-    costOfThat.innerHTML = ' Cost: ' + item['cost'];
+    costOfThat.innerHTML = ' Cost: ' + doTheFormat(item['cost']);
     shopItem.addEventListener('click', (e)=>{
         processPurchase(item)
     })
@@ -460,7 +551,7 @@ function createShopItem(item) {
         } else if (money > item['cost']) {
             canbuy = "<span style='color: green'>You can buy this item, and it will leave you with " + doTheFormat(money - item['cost']) + " emeralds left over.</span>"
         }
-        tooltip.innerHTML = "<a style='font-size: 18;'><b>" + item['name'] + "</b></a><br><a>" + item['desc'] + "</a><br><a>Cost: " + doTheFormat(item['cost']) + " Emeralds</a><br><a>You have: " + item['has'] + ".</a><br><a>This adds " + item['mps'] + " Emeralds Per Second.</a><br><a>" + canbuy + "</a>";
+        tooltip.innerHTML = "<a style='font-size: 18;'><b>" + item['name'] + "</b></a><br><a>" + item['desc'] + "</a><br><a>Cost: " + doTheFormat(item['cost']) + " Emeralds</a><br><a>You have: " + item['has'] + ".</a><br><a>This adds " + doTheFormat(item['mps']) + " Emeralds Per Second.</a><br><a>" + canbuy + "</a>";
         
     })
     shopItem.addEventListener('mouseenter', (e)=>{
@@ -504,7 +595,7 @@ function createShopItem(item) {
         tooltip.hidden = false;
         
         if(!item['soldout']) {
-        tooltip.innerHTML = '<a style="font-size: 18;"><b>' + item['name'] + '</b></a><br><a>' + item['desc'] + '</a><br><a>Cost: ' + doTheFormat(item['cost']) + ' Emeralds</a><br><a>This adds ' + item['epc'] + ' Emeralds Per Click.</a><br><a>' + canbuy + '</a>' + soldout
+        tooltip.innerHTML = '<a style="font-size: 18;"><b>' + item['name'] + '</b></a><br><a>' + item['desc'] + '</a><br><a>Cost: ' + doTheFormat(item['cost']) + ' Emeralds</a><br><a>This adds ' + doTheFormat(item['epc']) + ' Emeralds Per Click.</a><br><a>' + canbuy + '</a>' + soldout
     } else {
         tooltip.innerHTML = '<a><b>' + item['name'] + '</b></a><a>' + soldout + '</a>';
     }
@@ -546,6 +637,7 @@ function updateGame() {
     updateCAC(shop13)
     updateCAC(shop14)
     updateCAC(shop15)
+    updateCAC(ruby1)
     positionRich(money)
     ruby_count.innerHTML = rubies;
 }
@@ -569,13 +661,21 @@ function clangSound() {
         audio2.play();
     }
 }
+const selAud = new Audio('./music/sound-effect/select.mp3');
 function clickSound() {
-    const selAud = new Audio('./music/sound-effect/select.mp3');
+    selAud.pause()
+    selAud.currentTime = 00;
     selAud.volume = volume;
     selAud.play();
 }
 emerald.addEventListener('click', (e)=>{
     money = moneyPerClick + money;
+    if(rubylock) {
+        let chance = getRandomArbitrary(0, 10000);
+        if(chance == 0) {
+            rubies++
+        }
+    }
     updateGame()
     clangSound()
     createLilFloatThing(e, moneyPerClick)
@@ -596,6 +696,7 @@ createShopItem(shop12)
 createShopItem(shop13)
 createShopItem(shop14)
 createShopItem(shop15)
+createShopItem(ruby1)
 createShopItem(up1)
 createShopItem(up2)
 createShopItem(up3)
@@ -813,6 +914,14 @@ function load(string) {
                 shop15['has'] = prin(ram)
                 ram=""
                 on++
+            } else if (on == 37) {
+                ruby1['cost'] = prin(ram)
+                ram=""
+                on++
+            } else if (on == 38) {
+                ruby1['has'] = prin(ram)
+                ram=""
+                on++
             }
         } else if(string.charAt(i) != "") {
             ram += string.charAt(i)
@@ -834,6 +943,13 @@ function save() {
     s(shop11['has']) + s(shop12['cost']) + s(shop12['has']) +
     s(shop13['cost']) + s(shop13['has']) + s(up1['soldout'] + 0) +
     s(up2['soldout'] + 0) + s(up3['soldout'] + 0) + s(shop14['cost']) +
-    s(shop14['has']) + s(rubies) + s(shop15['cost']) + s(shop15['has'])
+    s(shop14['has']) + s(rubies) + s(shop15['cost']) + s(shop15['has']) +
+    s(ruby1['cost']) + s(ruby1['has'])
     )
 }
+setInterval(() => {
+    if(money >= 1000000000000) {
+        rubylock = true;
+    }
+}, 0);
+closeRubyShop()

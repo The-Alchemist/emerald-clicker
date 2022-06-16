@@ -9,6 +9,12 @@
         <a>Your browser does not support javascript, or you have it disabled. Please enable it for this game to work.</a>
     </noscript>
     <body>
+        <div id="notification-chamber"></div>
+        <div id="ruby-shop-container">
+            <div id="ruby-shop">
+                <button onclick="closeRubyShop()">Close</button>
+            </div>
+        </div>
         <div id="popup" hidden>
             <h1>Hey!</h1>
             <a>Make sure to regularly update your Emerald Clicker game, as I am working on it A LOT!</a><br>
@@ -37,10 +43,11 @@
             <div id="buttonz">
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#credits-div').hidden = false;" id="credits">Credits</button><br>
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#settings-div').hidden = false;" id="settings">Settings</button><br>
-                <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#modcheck-div').hidden = false;" id="modcheck-button">Mod Check</button><br>
+                <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#modcheck-div').hidden = false;" id="modcheck-button" hidden>Mod Check</button>
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#download-div').hidden = false;" id="download-enter">Saves</button>
             <div id="ruby-counter-container">
-                <img id="ruby-thing" width="50" src="./images/icons/ruby-sharts.png"/> <a id="ruby-count"></a>
+                <img id="ruby-thing" width="50" src="./images/icons/ruby-sharts.png"/> <a id="ruby-count"></a><br>
+                <button id="ruby-shop-button" onclick="openRubyShop()"class="big-one">Open Shop</button>
             </div>
         </div>
             
@@ -102,6 +109,7 @@
     </body>
     </html>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./notification.js"></script>
     <script src="./modcheck.js"></script>
     <script src="./index.js"></script>
     <script></script>
