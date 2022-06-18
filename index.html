@@ -9,10 +9,9 @@
         <a>Your browser does not support javascript, or you have it disabled. Please enable it for this game to work.</a>
     </noscript>
     <body>
-        <div id="notification-chamber"></div>
         <div id="ruby-shop-container">
             <div id="ruby-shop">
-                <button onclick="closeRubyShop()">Close</button>
+                <button id="ruby-close-ig" class="big-one" onclick="closeRubyShop()">Close</button>
             </div>
         </div>
         <div id="popup" hidden>
@@ -27,9 +26,10 @@
         <div id="emerald-container">
             <a id="emerald-count-display"></a><br>
             <a id="emerald-per-second-display"></a><br>
-            <a id="emerald-per-click-display"></a>
+            <a id="emerald-per-click-display"></a><br>
+            <a id="emerald-mine-name"></a>
             <img src="./images/low-res-emerald.png" id="emerald">
-            <img src="./images/rich.png" id="rich-div">
+            <img src="./images/rich.png" id="rich-div" hidden>
         </div>
         <div id="exploit-container" hidden>
             <a><b>Exploits</b></a> 
@@ -39,6 +39,11 @@
             <button onclick="money = money + parseInt(document.querySelector('#addEms').value)">Add</button>
         </div>
         <div id="option-container">
+            <div id="slogan-container">
+                <button onclick="rerollSlogans()">Not satisfied? Click Me!</button><br>
+                <a><b>Emerald Clicker</b></a><br>
+                <a id="slogan-text"></a><br>
+            </div>
             <div hidden><a href="javascript:(()=>{save()})();" style="cursor: url('./images/cur2.png') 5 0, pointer;">Save Game</a> <a href="javascript:(()=>{let prompting = prompt('Enter your save:'); load(prompting)})();" style="cursor: url('./images/cur2.png') 5 0, pointer;">Load Game</a></div>
             <div id="buttonz">
                 <button onclick="document.querySelector('#buttonz').hidden = true;document.querySelector('#credits-div').hidden = false;" id="credits">Credits</button><br>
@@ -52,35 +57,36 @@
         </div>
             
             <div id="credits-div" hidden>
-                <button onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#credits-div').hidden = true;" id="close-credits">Close</button><br>
+                <button class="big-one" onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#credits-div').hidden = true;" id="close-credits">Close</button><br>
                 <a>Eli's <span id="diamond-clicker-link" class="sudolink" onclick="window.open('https://edca.w3spaces.com/v3/index-1.html')">Diamond Clicker</span> for inspiration.</a><br>
                 <a>Pngimg for the emerald image.</a><br>
-                <a>Zapsplat for metal pickaxe clang.</a><br>
+                <a>Zapsplat for metal clang, and the cash register sound.</a><br>
                 <a>Microsoft for the cursor image.</a><br>
-                <a>Progamming done by: Thomas Smith (with help from ppl at stack overflow!)</a><br>
+                <a>Progamming done by: rschoolu (with help from ppl at stack overflow!)</a><br>
                 <a>Google Images for the stone background.</a><br>
                 <a>The rest of the design is my design.</a><br>
                 <img id="logo-png" src="./images/logo.png" style="width: 100%; height: 160px;">
             </div> 
             <div id="download-div" hidden>
-                <button onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#download-div').hidden = true;" id="download-button-c">Close</button><br>
+                <button class="big-one"onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#download-div').hidden = true;" id="download-button-c">Close</button><br>
                 <a><b>Saves Center</b></a><br>
                 <a>You can save your game.</a><br>
+                <a hidden style="color: red;">It is recommended that you refresh your game before you load a save from before this update!!!</a>
                 <button onclick="save()" class="wide-one">Save Game</button><br>
-                <button class="wide-one" onclick="let loliamsocool = prompt('Load a Save:'); load(loliamsocool);">Load Game</button>
+                <button class="wide-one" onclick="preLoadSave()">Load Game</button>
             </div>
             <div id="settings-div" hidden>
-                <button onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#settings-div').hidden = true;document.querySelector('#buttonz').hidden = false;document.querySelector('#credits-div').hidden = true;">Close</button><br>
+                <button class="big-one"onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#settings-div').hidden = true;document.querySelector('#buttonz').hidden = false;document.querySelector('#credits-div').hidden = true;">Close</button><br>
                 <a><b>Settings</b></a><br>
-                <div id="music-option-div" hidden>
-                    <input class="checkbox" type="checkbox" id="music">
-                    <a>Enable Background Music</a><br>
-                </div> 
                 <div id="volume-control-div">
                     <a><b>Volume Control</b></a>
                     <input class="slider" type="range" min="0" max="100" id="volume-control">
                     <a id="vol-display"></a>
                 </div>
+                <div id="music-option-div">
+                    <input class="checkbox" type="checkbox" id="music">
+                    <a>Enable Background Music</a><br>
+                </div> 
                 <div id="short-numbers-div">
                     <input class="checkbox" type="checkbox" id="short-numbers-checkbox"> 
                     <a>Short Numbers</a>
@@ -93,7 +99,7 @@
                 <a id="version-display"></a>
             </div>
             <div id="modcheck-div" hidden>
-                <button onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#modcheck-div').hidden = true;" id="close-credits">Close</button><br>
+                <button class="big-one"onclick="document.querySelector('#buttonz').hidden = false;document.querySelector('#modcheck-div').hidden = true;" id="close-credits">Close</button><br>
                 <a id="modcheck-toltip"><b>Mod Check</b></a><br>
                 <input id="modcheck">
                 <button onclick="modcheck()">Check</button>

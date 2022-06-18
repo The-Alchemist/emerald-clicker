@@ -1,6 +1,26 @@
-// lol my code is garbo
-const version_name = "v1.5.0a";
-const tooltip_margin = 18;
+const version_name = "v1.6.0a";
+let blank_save = "0|1|0|10|0|50|0|250|0|1500|0|2750|0|4750|0|10000|0|15000|0|30000|0|35000|0|45000|0|55000|0|69000|0|0|0|0|100000|0|0|120000|0|1|0|4|0|0|150000|0|0|undefined|"
+let premade_names = ['Josh',
+'John',
+'Jack',
+'Eli',
+'Shane',
+'WhateverYourNameIs',
+'']
+let current_name = "&quot;";
+let slogans = ['Free!',
+'Where stupidity is breeded!',
+'Where assholes get made fun of!',
+"The dumping ground for rschoolu's inside jokes.",
+'Eternal Screaming!',
+'You did not ask for this game, yet you played it.',
+'Brain cells die here.',
+'IQ Graveyard!',
+'Javascript!',
+'const stupidity_level = infinity;',
+'Born yesterday!',
+'Janky!']
+const tooltip_margin = 22;
 let rubies = 0;
 let rubylock = false;
 const emerald_container = document.querySelector('#emerald-container');
@@ -38,6 +58,11 @@ short_numbers_check.addEventListener('change', (e)=>{
         shortnumbers = false;
     }
 })
+// https://stackoverflow.com/questions/9071573/is-there-a-simple-way-to-make-a-random-selection-from-an-array-in-javascript-or
+function choose(choices) {
+    /* var */let index = Math.floor(Math.random() * choices.length);
+    return choices[index];
+}
 let shortnumbers = false;
 vol_control.value = 100;
 function doTheFormat(thing) {
@@ -103,6 +128,26 @@ let music_disabled_pre = true; // this is useless
 let money = 0;
 let moneyPerSecond = 0;
 let moneyPerClick = 1;
+/* slogan */
+function rerollSlogans() {
+    document.querySelector('#slogan-text').innerHTML = choose(slogans);
+}
+rerollSlogans()
+function rerollName() {
+    current_name = choose(premade_names);
+}
+rerollName()
+function sanitize(string) {
+    let sani1 = string.replaceAll('"', '&quot;');
+    return sani1;
+}
+document.querySelector('#emerald-mine-name').addEventListener('mousedown', (e)=>{
+    let lelyouthink = prompt('Enter a new name:')
+    if(lelyouthink == null) {
+        return
+    }
+    current_name = sanitize(lelyouthink);
+})
 /* items */
 let shop1 = {
     name: "Drill",
@@ -254,6 +299,16 @@ let shop15 = {
     rubyItem: false,
     upgrade: false
 }
+let shop16 = {
+    name: "Jamaal",
+    desc: "He failed at school, maybe give him a shot at mining???",
+    mps: 500,
+    costMulti: 1.4,
+    has: 0,
+    cost: 150000,
+    rubyItem: false,
+    upgrade: false
+}
 let up1 = {
     name: "Mikey Mouse",
     id: "mikeymouse",
@@ -297,6 +352,28 @@ let up3 = {
     special: false,
     upgrade: true
 }
+let up4 = {
+    name: "Jaelynn",
+    id: "jae",
+    desc: "YOU.",
+    epc: 20,
+    cost: 12000,
+    src: "./images/icons/jae.png",
+    soldout: false,
+    special: false,
+    upgrade: true
+}
+let up5 = {
+    name: "Brandon Lice",
+    id: "blice",
+    desc: "lel its brandon lice",
+    epc: 30,
+    cost: 20000,
+    src: "./images/icons/blice.png",
+    soldout: false,
+    special: false,
+    upgrade: true
+}
 let ruby1 = {
     name: "Ruby Pickaxe",
     desc: "Ruby Pickaxes are WAY more valuable!",
@@ -304,6 +381,16 @@ let ruby1 = {
     costMulti: 2,
     has: 0,
     cost: 1,
+    upgrade: false,
+    rubyItem: true
+}
+let ruby2 = {
+    name: "Ruby Miner",
+    desc: "Miners made of rubies? If you say so...",
+    mps: 250000,
+    costMulti: 2,
+    has: 0,
+    cost: 4,
     upgrade: false,
     rubyItem: true
 }
@@ -325,11 +412,14 @@ let shop69 = {
     cost: 0,
     upgrade: false
 }
+function nameTick() {
+    document.querySelector('#emerald-mine-name').innerHTML = current_name + "'s Mine";
+}
 function positionRich(lel) {
-    $('#rich-div').css('bottom', lel - 999900);
-    if(lel >= 999900) {
-        $('#rich-div').css('bottom', 2 / 999900);
-    }
+    //$('#rich-div').css('bottom', lel - 999900);
+    //if(lel >= 999900) {
+    //    $('#rich-div').css('bottom', 2 / 999900);
+    //}
     
 }
 document.querySelector('#version-display').innerHTML = version_name;
@@ -403,6 +493,9 @@ function processPurchase(item, obj) {
         return false
     }
 }
+    const purchaseSound = new Audio("./music/sound-effect/purchase.mp3")
+    purchaseSound.volume = volume;
+    purchaseSound.play()
     if(!item['upgrade']){
         if(item['rubyItem']) {
             if(rubies < item['cost']) {
@@ -432,32 +525,14 @@ function processPurchase(item, obj) {
     return true;
 }
 }
-const hellcat = new Audio('./music/desmeon-hellcat.mp3')
-const buzzard = new Audio('./music/neotunehermax-buzzard.mp3')
-const free = new Audio('./music/elektronomiajdd-free.mp3')
-hellcat.volume = 0.1;
-buzzard.volume = 0.1;
-free.volume = 0.1;
+const ost = new Audio('./music/ost01.mp3');
+ost.loop = true;
 document.querySelector('#music').addEventListener('click', (e)=>{
     
     if(document.querySelector('#music').checked){
-        if(!music_disabled_pre) {
-            hellcat.play()
-        hellcat.currentTime = 0;
-        hellcat.onended = function() {
-            buzzard.play()
-        }
-        buzzard.onended = function() {
-            free.play()
-        }
-        free.onended = function() {
-            hellcat.play()
-        }
-    }
-    } else if (!document.querySelector('#music').checked) {
-        hellcat.pause()
-        buzzard.pause()
-        free.pause()
+        ost.play()
+    } else {
+        ost.pause()
     }
 })
 document.querySelector('#modcheck-toltip').addEventListener('mousemove', (e)=>{
@@ -490,7 +565,7 @@ function createShopItem(item) {
     if(item['upgrade']==false) {
         if(item['rubyItem']==true) {
             const rubyItem = document.createElement('div');
-            rubyItem.classList.add('shop-item');
+            rubyItem.classList.add('ruby-item');
             rubyItem.innerHTML = '<a style="font-size: 18;"><b>' + item['name'] + '</b></a> <br><a>' + item['desc'] + '</a>';
             const costOfThat = document.createElement('a');
             const br = document.createElement('br')
@@ -506,11 +581,11 @@ function createShopItem(item) {
             rubyItem.addEventListener('mousemove', (e)=>{
                 tooltip.hidden = false;
                 if(rubies < item['cost']) {
-                    canbuy = "<span style='color: darkred;'>You can't buy this item. You need " + doTheFormat(item['cost'] - money) + " more ruby shards.</span>"
+                    canbuy = "<span style='color: darkred;'>You can't buy this item. You need " + doTheFormat(item['cost'] - rubies) + " more ruby shards.</span>"
                 } else if (rubies == item['cost']) {
                     canbuy = "<span style='color: goldenrod;'>You can buy this item, but it will leave you with no more ruby shards.</span>"
                 } else if (rubies > item['cost']) {
-                    canbuy = "<span style='color: green'>You can buy this item, and it will leave you with " + doTheFormat(money - item['cost']) + " ruby shards left over.</span>"
+                    canbuy = "<span style='color: green'>You can buy this item, and it will leave you with " + doTheFormat(rubies - item['cost']) + " ruby shards left over.</span>"
                 }
                 tooltip.innerHTML = "<a style='font-size: 18;'><b>" + item['name'] + "</b></a><br><a>" + item['desc'] + "</a><br><a>Cost: " + doTheFormat(item['cost']) + " Ruby Shards</a><br><a>You have: " + item['has'] + ".</a><br><a>This adds " + doTheFormat(item['mps']) + " Emeralds Per Second.</a><br><a>" + canbuy + "</a>";
                 
@@ -637,7 +712,9 @@ function updateGame() {
     updateCAC(shop13)
     updateCAC(shop14)
     updateCAC(shop15)
+    updateCAC(shop16)
     updateCAC(ruby1)
+    updateCAC(ruby2)
     positionRich(money)
     ruby_count.innerHTML = rubies;
 }
@@ -696,13 +773,18 @@ createShopItem(shop12)
 createShopItem(shop13)
 createShopItem(shop14)
 createShopItem(shop15)
+createShopItem(shop16)
 createShopItem(ruby1)
+createShopItem(ruby2)
 createShopItem(up1)
 createShopItem(up2)
 createShopItem(up3)
+createShopItem(up4)
+createShopItem(up5)
 let volume;
 setInterval(()=>{
     volume = vol_control.value / 100;
+    ost.volume = 0.1 * volume;
 }, 0);
 setInterval(()=>{
     money = money + moneyPerSecond;
@@ -922,6 +1004,44 @@ function load(string) {
                 ruby1['has'] = prin(ram)
                 ram=""
                 on++
+            } else if (on == 39) {
+                ruby2['cost'] = prin(ram)
+                ram=""
+                on++
+            } else if (on == 40) {
+                ruby2['has'] = prin(ram)
+                ram=""
+                on++
+            } else if (on == 41) {
+                if(ram=="1"){
+                    up4['soldout'] = true;
+                    $("#jaeup").remove()
+                }else{
+
+                }
+                ram="";
+                on++
+            } else if (on == 42) {
+                shop16['cost'] = prin(ram)
+                ram="";
+                on++
+            } else if (on == 43) {
+                shop16['has'] = prin(ram)
+                ram=""
+                on++
+            } else if (on ==44) {
+                if(ram=="1"){
+                    up5['soldout'] = true;
+                    $("#bliceup").remove()
+                }else{
+
+                }
+                ram="";
+                on++
+            } else if (on == 45) {
+                current_name = ram;
+                ram=""
+                on++
             }
         } else if(string.charAt(i) != "") {
             ram += string.charAt(i)
@@ -944,12 +1064,23 @@ function save() {
     s(shop13['cost']) + s(shop13['has']) + s(up1['soldout'] + 0) +
     s(up2['soldout'] + 0) + s(up3['soldout'] + 0) + s(shop14['cost']) +
     s(shop14['has']) + s(rubies) + s(shop15['cost']) + s(shop15['has']) +
-    s(ruby1['cost']) + s(ruby1['has'])
+    s(ruby1['cost']) + s(ruby1['has']) + s(ruby2['cost']) + s(ruby2['has']) +
+    s(up4['soldout'] + 0) + s(shop16['cost']) + s(shop16['has']) + s(up5['soldout'] + 0) +
+    s(current_name)
     )
 }
 setInterval(() => {
-    if(money >= 1000000000000) {
+    if(money >= 10000000) {
         rubylock = true;
     }
+    nameTick()
 }, 0);
 closeRubyShop()
+function preLoadSave() {
+    let sure = confirm("Do you REALLY want to load a save?");
+    if(sure) {
+        load(blank_save);
+        let propt = prompt('Enter a save:');
+        load(propt)
+    }
+}
