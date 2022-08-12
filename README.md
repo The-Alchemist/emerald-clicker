@@ -3,4 +3,4 @@ Emerald Clickers is an incremental game, or more commonly known as a clicker gam
 Quality of life features:
 - Backwards Compatibility With Saves (load a v1.5.0a save to v1.3.0a)
 - Easy Modability
-- Compatible with macOS, Windows, Linux, Chrome OS, etc. Basically anything that runs chrome, firefox, opera, or edge.
+- Compatible with macOS, Windows, Linux, Chrome OS, etc. Basically anything that runs Chrome, Firefox, Opera, or Edge.
